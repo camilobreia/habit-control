@@ -1,0 +1,23 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// criamos uma tabela com nome model e o nome do nosso model que é Habit, ou seja, vai salvar os hábitos ali dentro
+// @id é a chave primária da aplicação
+// @default significa que quando o hábito for criado será preenchido automaticamente com uuid (id único universal)
+//@@map is used to assign a different name to a model and not a particular field. So for example if a table name is UserDetails and you want to access it as user_details in the generated client you can use @@map attribute.
+model Habit {
+  id String @id @default(uuid())
+  title String
+  created_at DateTime
+
+  @@map("habits")
+}
